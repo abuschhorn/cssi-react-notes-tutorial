@@ -10,20 +10,22 @@ export const NoteForm = ({addNote}) => {
     const handleSubmit= (event) => {
         event.preventDefault();
         addNote({title: title, subtitle: subtitle, text: text})
+        setTitle('')
+        setSubtitle('')
+        setText("")
 
 
     }
-    
     return (
         <div>
             <h1>Create a new note</h1>
             <hr />
            <form onSubmit={handleSubmit}>
-            <label value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Place title here..." />
-            <label value={subtitle} onChange={(event) => setSubtitle(event.target.value)} placeholder="Place subtitle here..." />
-            <label value={text} onChange={(event) => setText(event.target.value)} placeholder="Place text here..." />
+            <input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Place title here..." />
+            <input value={subtitle} onChange={(event) => setSubtitle(event.target.value)} placeholder="Place subtitle here..." />
+            <input value={text} onChange={(event) => setText(event.target.value)} placeholder="Place text here..." />
            
-            <button>Add Note</button>
+            <button className="button" onClick={() => handleSubmit}>Add Note</button>
            
            </form> 
         </div>

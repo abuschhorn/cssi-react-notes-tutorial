@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import { NoteForm } from "./components/NoteForm"
 import {Note} from "./components/Note"
+import {ClearAll} from "./components/ClearAll"
 
 function App() {
   const [notes, setNotes] = useState([
@@ -16,15 +17,18 @@ function App() {
       text:"finish derivative homework"
     }
   ])
-
-  // const handleNotes = (notes) => {
-  //   const tempArr = [...notes];
-  //   tempArr.push(notes)
-  //   setNotes(tempArr);
-  // }
-  const addNote = (title, subtitle, text) => {
-    const newNotes = [...notes, {title, subtitle, text}];
+  const addNote = (note) => {
+    const newNotes = [...notes, note];
+    console.log("this is new notes", newNotes);
     setNotes(newNotes);
+  }
+  const deleteNote = index => {
+    const newNotes = [...notes]
+    newNotes.splice(index, 1);
+    setNotes(newNotes)
+  }
+  const clear = () => {
+    setNotes([])
   }
   
   
@@ -32,8 +36,9 @@ function App() {
   return (
     <div className="App">
       <h1>Notes</h1>
-      <Note notes={notes}/>
+      <Note notes={notes} deleteNote={deleteNote}/>
       <NoteForm addNote={addNote}/>
+      <ClearAll clear={clear}/>
     </div>
   );
 }
